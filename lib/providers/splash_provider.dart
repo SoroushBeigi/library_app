@@ -10,7 +10,7 @@ class SplashProvider extends ChangeNotifier {
   bool get isLoaded => _isLoaded;
 
   void load(BuildContext context) {
-    _timer = Timer(const Duration(seconds: 3), () {
+    _timer = Timer(const Duration(seconds: 4), () {
       _isLoaded = true;
       if (storage.loggedIn) {
         context.pushReplacement('/home');

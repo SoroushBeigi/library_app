@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:library_app/providers/splash_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -27,11 +28,17 @@ class _SplashScreenState extends State<_SplashScreen> {
     final provider = context.watch<SplashProvider>();
     if (!provider.isLoaded) provider.load(context);
     return Scaffold(
-      backgroundColor: Colors.blueGrey,
+      backgroundColor: Colors.brown,
       body: Center(
         child: Column(
-          children: [Text('Splash')],
-        ),
+          children: [
+            Image.asset('assets/library.png'),
+            Text(
+              'Library Database App',
+              style: Theme.of(context).textTheme.displayMedium!.copyWith(color: Colors.white),
+            ),
+          ],
+        ).animate(effects: [const ScaleEffect(duration: Duration(seconds: 3))]),
       ),
     );
   }
