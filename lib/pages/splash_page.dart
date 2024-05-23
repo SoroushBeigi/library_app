@@ -35,10 +35,18 @@ class _SplashScreenState extends State<_SplashScreen> {
             Image.asset('assets/library.png'),
             Text(
               'Library Database App',
-              style: Theme.of(context).textTheme.displayMedium!.copyWith(color: Colors.white,fontFamily: 'Poppins',fontWeight: FontWeight.bold),
+              style: Theme.of(context)
+                  .textTheme
+                  .displayMedium!
+                  .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
             ),
           ],
-        ).animate(effects: [const ScaleEffect(duration: Duration(seconds: 3))]),
+        ).animate(effects: [
+          const FadeEffect(
+            duration: Duration(seconds: 3),
+          curve: Curves.easeOut,
+          )
+        ]),
       ),
     );
   }
