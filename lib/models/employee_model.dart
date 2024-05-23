@@ -14,4 +14,25 @@ class EmployeeModel {
     this.position,
     this.salary,
   });
+
+    EmployeeModel.fromJson(Map<String, dynamic> json) {
+    if(json["id"] is int) {
+      id = json["id"];
+    }
+    if(json["dateJoined"] is String) {
+      dateJoined = json["dateJoined"];
+    }
+    if(json["firstName"] is String) {
+      firstName = json["firstName"];
+    }
+    if(json["lastName"] is String) {
+      lastName = json["lastName"];
+    }
+    if(json["position"] is String) {
+      position = json["position"];
+    }
+    if(json["salary"] is double) {
+      salary = json["salary"];
+    }
+  }
 }
