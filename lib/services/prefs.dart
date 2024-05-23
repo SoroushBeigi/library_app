@@ -1,11 +1,11 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class Storage {
+class StorageService {
   static SharedPreferences? _sharedPrefs;
 
-  factory Storage() => Storage._internal();
+  factory StorageService() => StorageService._internal();
 
-  Storage._internal();
+  StorageService._internal();
 
   Future<void> init() async {
     _sharedPrefs ??= await SharedPreferences.getInstance();
@@ -25,4 +25,4 @@ class Storage {
 
 }
 
-final storage = Storage();
+final storage = StorageService();

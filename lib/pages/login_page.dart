@@ -35,6 +35,7 @@ class _LoginScreenState extends State<_LoginScreen> {
         cardTheme: const CardTheme(surfaceTintColor: Colors.white,color: Colors.white),
         titleStyle: const TextStyle(color: Colors.white),
       ),
+      hideForgotPasswordButton: true,
       userType: LoginUserType.name,
       messages: LoginMessages(userHint: 'Username'),
       userValidator: (value) => (value?.isEmpty ?? true) ? 'Username cannot be empty!' : null,
