@@ -28,12 +28,19 @@ class _LoginScreenState extends State<_LoginScreen> {
   Widget build(BuildContext context) {
     final provider = context.watch<LoginProvider>();
     return FlutterLogin(
-      theme: LoginTheme(titleStyle: const TextStyle(color: Colors.white)),
+      logo: const AssetImage('assets/library.png'),
+      theme: LoginTheme(
+        pageColorDark: Colors.brown[900],
+        pageColorLight: Colors.brown[500],
+        cardTheme: const CardTheme(surfaceTintColor: Colors.white,color: Colors.white),
+        titleStyle: const TextStyle(color: Colors.white),
+      ),
       userType: LoginUserType.name,
-      userValidator: (value) => null,
+      messages: LoginMessages(userHint: 'Username'),
+      userValidator: (value) => (value?.isEmpty ?? true) ? 'Username cannot be empty!' : null,
       title: 'Library',
-      onLogin: (p0) => provider.login(p0.name,p0.password),
-      onSignup:(p0) => provider.register(p0.name!,p0.password!),
+      onLogin: (p0) => provider.login(p0.name, p0.password),
+      onSignup: (p0) => provider.register(p0.name!, p0.password!),
       onSubmitAnimationCompleted: () {
         context.pushReplacement('/home');
       },
