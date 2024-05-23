@@ -1,8 +1,7 @@
 import 'package:go_router/go_router.dart';
-import 'package:library_app/pages/home_page.dart';
-import 'package:library_app/pages/login_page.dart';
-import 'package:library_app/pages/splash_page.dart';
-
+import 'package:library_app/pages/home_page/home_page.dart';
+import 'package:library_app/pages/login_page/login_page.dart';
+import 'package:library_app/pages/splash_page/splash_page.dart';
 class Routes {
   final routes = GoRouter(
     routes: [
