@@ -14,17 +14,17 @@ class BookModel {
   });
 
     BookModel.fromJson(Map<String, dynamic> json) {
-    if(json["id"] is int) {
-      id = json["id"];
+    if(json["Id"] is int) {
+      id = json["Id"];
     }
-    if(json["price"] is double) {
-      price = json["price"];
+    if(json["Price"] is double) {
+      price = json["Price"];
     }
-    if(json["name"] is String) {
-      name = json["name"];
+    if(json["Name"] is String) {
+      name = json["Name"];
     }
-    if(json["genre"] is String) {
-      genre = json["genre"];
+    if(json["Genre"] is String) {
+      genre = json["Genre"];
     }
     if(json["takenBy"] is String) {
       takenBy = json["takenBy"];
