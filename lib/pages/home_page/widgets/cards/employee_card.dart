@@ -8,7 +8,6 @@ class EmployeeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final primary = Theme.of(context).colorScheme.primary;
-    print(MediaQuery.of(context).size.width);
     return Container(
       margin: const EdgeInsets.all(8),
       decoration: BoxDecoration(
@@ -30,33 +29,35 @@ class EmployeeCard extends StatelessWidget {
               IconButton(onPressed: () {}, icon: const Icon(Icons.delete)),
             ],
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'First Name: ${model.firstName ?? ''}',
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-              Text(
-                'Last Name: ${model.lastName ?? ''}',
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-              Text(
-                'Position: ${model.position ?? ''}',
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-              Text(
-                'Date Joined: ${model.dateJoined ?? ''}',
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-              Text(
-                'Salary: ${'${model.salary?.toString() ?? ''}T'}',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyLarge!
-                    .copyWith(fontWeight: FontWeight.bold),
-              ),
-            ],
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'First Name: ${model.firstName ?? ''}',
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                Text(
+                  'Last Name: ${model.lastName ?? ''}',
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                Text(
+                  'Position: ${model.position ?? ''}',
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                Text(
+                  'Date Joined: ${model.dateJoined ?? ''}',
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                Text(
+                  'Salary: ${'${model.salary?.toString() ?? ''}T'}',
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyLarge!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
           ),
         ],
       ),

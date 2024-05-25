@@ -8,7 +8,6 @@ class MemberCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final primary = Theme.of(context).colorScheme.primary;
-    print(MediaQuery.of(context).size.width);
     return Container(
       margin: const EdgeInsets.all(8),
       decoration: BoxDecoration(
@@ -30,34 +29,36 @@ class MemberCard extends StatelessWidget {
               IconButton(onPressed: () {}, icon: const Icon(Icons.delete)),
             ],
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'First Name: ${model.firstName ?? ''}',
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-              Text(
-                'Last Name: ${model.lastName ?? ''}',
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-              Text(
-                'Address: ${model.address ?? ''}',
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-              Text(
-                'Email: ${model.email ?? ''}',
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-              Text(
-                'Phone: ${model.phoneNumber ?? ''}',
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-              Text(
-                'Date Joined: ${model.dateJoined ?? ''}',
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-            ],
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'First Name: ${model.firstName ?? ''}',
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                Text(
+                  'Last Name: ${model.lastName ?? ''}',
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                Text(
+                  'Address: ${model.address ?? ''}',
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                Text(
+                  'Email: ${model.email ?? ''}',
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                Text(
+                  'Phone: ${model.phoneNumber ?? ''}',
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                Text(
+                  'Date Joined: ${model.dateJoined ?? ''}',
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+              ],
+            ),
           ),
         ],
       ),

@@ -29,25 +29,27 @@ class BookCard extends StatelessWidget {
               IconButton(onPressed: () {}, icon: const Icon(Icons.delete)),
             ],
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Name: ${model.name ?? ''}',
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-              Text(
-                'Genre: ${model.genre ?? ''}',
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-              Text(
-                '${model.price?.toString() ?? ''}T',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyLarge!
-                    .copyWith(fontWeight: FontWeight.bold),
-              ),
-            ],
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Name: ${model.name ?? ''}',
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                Text(
+                  'Genre: ${model.genre ?? ''}',
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                Text(
+                  '${model.price?.toString() ?? ''}T',
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyLarge!
+                      .copyWith(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
           ),
         ],
       ),
