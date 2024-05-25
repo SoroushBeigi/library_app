@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:library_app/pages/home_page/widgets/book_card.dart';
 import 'package:library_app/providers/home_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -11,7 +12,6 @@ class HomeScreen extends StatelessWidget {
       create: (_) => HomeProvider(),
       builder: (context, child) => const _HomeScreen(),
     );
-    
   }
 }
 
@@ -28,11 +28,12 @@ class __HomeScreenState extends State<_HomeScreen> {
     super.initState();
     final provider = context.read<HomeProvider>();
     provider.getBooks();
-    
   }
+
   @override
   Widget build(BuildContext context) {
-   return Center(
+    final provider = context.watch<HomeProvider>();
+    return Center(
       child: DefaultTabController(
         length: 4,
         child: Scaffold(
@@ -75,9 +76,11 @@ class __HomeScreenState extends State<_HomeScreen> {
             ),
             title: const Text('Home Page'),
           ),
-          body: const TabBarView(
+          body: TabBarView(
             children: [
-              Icon(Icons.directions_car),
+              provider.isLoading
+                  ? const Center(child:  CircularProgressIndicator())
+                  : _buildBookListView(),
               Icon(Icons.directions_transit),
               Icon(Icons.directions_bike),
               Icon(Icons.airline_seat_flat_sharp),
@@ -85,6 +88,16 @@ class __HomeScreenState extends State<_HomeScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildBookListView() {
+    final provider = context.watch<HomeProvider>();
+    return ListView.builder(
+      itemBuilder: (context, index) => BookCard(
+        model: provider.books[index],
+      ),
+      itemCount: provider.books.length,
     );
   }
 }

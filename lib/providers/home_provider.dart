@@ -5,14 +5,15 @@ import 'package:library_app/services/dio.dart';
 class HomeProvider extends ChangeNotifier {
   final _apiService = ApiService();
 
-  bool isLoaing = true;
+  bool isLoading = true;
   List<BookModel> books = [];
 
   Future<void> getBooks() async {
     // List<BookModel>? result = await _apiService.getBooks();
     // books = result ?? [];
-    Future.delayed(const Duration(seconds: 2)).then(
-      (_) => books = [
+    await Future.delayed(const Duration(seconds: 2)).then(
+      (value) {
+         books = [
         BookModel(
           id: 1,
           name: 'The books name is felan',
@@ -27,9 +28,11 @@ class HomeProvider extends ChangeNotifier {
           price: 150000,
           takenBy: 'Mohammad Beigi',
         ),
-      ],
+      ];
+      },
     );
-    isLoaing = false;
+   
+    isLoading = false;
     notifyListeners();
   }
 }
