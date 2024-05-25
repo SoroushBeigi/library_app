@@ -33,12 +33,14 @@ class _SplashScreenState extends State<_SplashScreen> {
         child: Column(
           children: [
             Image.asset('assets/library.png'),
-            Text(
-              'Library Database App',
-              style: Theme.of(context)
-                  .textTheme
-                  .displayMedium!
-                  .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+            FittedBox(
+              child: Text(
+                'Library Database App',
+                style: Theme.of(context)
+                    .textTheme
+                    .displayMedium!
+                    .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+              ),
             ),
           ],
         ).animate(effects: [

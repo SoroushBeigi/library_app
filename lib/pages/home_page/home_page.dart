@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:library_app/pages/home_page/widgets/book_card.dart';
+import 'package:library_app/pages/home_page/widgets/cards/book_card.dart';
+import 'package:library_app/pages/home_page/widgets/cards/employee_card.dart';
+import 'package:library_app/pages/home_page/widgets/cards/member_card.dart';
+import 'package:library_app/pages/home_page/widgets/cards/publisher_card.dart';
 import 'package:library_app/providers/home_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -38,8 +41,8 @@ class __HomeScreenState extends State<_HomeScreen> {
         length: 4,
         child: Scaffold(
           appBar: AppBar(
-            bottom: const TabBar(
-              tabs: [
+            bottom: TabBar(
+              tabs: const [
                 Tab(
                   icon: Column(
                     children: [
@@ -73,17 +76,26 @@ class __HomeScreenState extends State<_HomeScreen> {
                   ),
                 ),
               ],
+              onTap: (value) {
+                provider.onTabChanged(value);
+              },
             ),
             title: const Text('Home Page'),
           ),
           body: TabBarView(
             children: [
               provider.isLoading
-                  ? const Center(child:  CircularProgressIndicator())
+                  ? const Center(child: CircularProgressIndicator())
                   : _buildBookListView(),
-              Icon(Icons.directions_transit),
-              Icon(Icons.directions_bike),
-              Icon(Icons.airline_seat_flat_sharp),
+              provider.isLoading
+                  ? const Center(child: CircularProgressIndicator())
+                  : _buildMemberListView(),
+              provider.isLoading
+                  ? const Center(child: CircularProgressIndicator())
+                  : _buildPublisherListView(),
+              provider.isLoading
+                  ? const Center(child: CircularProgressIndicator())
+                  : _buildEmployeeListView(),
             ],
           ),
         ),
@@ -93,11 +105,69 @@ class __HomeScreenState extends State<_HomeScreen> {
 
   Widget _buildBookListView() {
     final provider = context.watch<HomeProvider>();
-    return ListView.builder(
-      itemBuilder: (context, index) => BookCard(
-        model: provider.books[index],
+    return Center(
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width >= 600
+            ? 500
+            : MediaQuery.of(context).size.width * 0.9,
+        child: ListView.builder(
+          itemBuilder: (context, index) => BookCard(
+            model: provider.books[index],
+          ),
+          itemCount: provider.books.length,
+        ),
       ),
-      itemCount: provider.books.length,
+    );
+  }
+
+  Widget _buildMemberListView() {
+    final provider = context.watch<HomeProvider>();
+    return Center(
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width >= 600
+            ? 500
+            : MediaQuery.of(context).size.width * 0.75,
+        child: ListView.builder(
+          itemBuilder: (context, index) => MemberCard(
+            model: provider.members[index],
+          ),
+          itemCount: provider.members.length,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPublisherListView() {
+    final provider = context.watch<HomeProvider>();
+    return Center(
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width >= 600
+            ? 500
+            : MediaQuery.of(context).size.width * 0.75,
+        child: ListView.builder(
+          itemBuilder: (context, index) => PublisherCard(
+            model: provider.publishers[index],
+          ),
+          itemCount: provider.publishers.length,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildEmployeeListView() {
+    final provider = context.watch<HomeProvider>();
+    return Center(
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width >= 600
+            ? 500
+            : MediaQuery.of(context).size.width * 0.75,
+        child: ListView.builder(
+          itemBuilder: (context, index) => EmployeeCard(
+            model: provider.employees[index],
+          ),
+          itemCount: provider.employees.length,
+        ),
+      ),
     );
   }
 }
