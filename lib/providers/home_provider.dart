@@ -73,22 +73,23 @@ class HomeProvider extends ChangeNotifier {
   Future<void> getPublishers() async {
     // List<BookModel>? result = await _apiService.getBooks();
     // books = result ?? [];
-    await Future.delayed(const Duration(seconds: 2)).then(
-      (value) {
-         publishers = [
-        PublisherModel(
-          id: 1,
-          name: 'The publisher name ',
-         address: 'Address felan felan Address felan felan '
-        ),
-         PublisherModel(
-          id: 2,
-          name: 'The 2nd publisher with a bit longer name',
-         address: 'Address felan felan Address felan felan longer address longer address '
-        ),
-      ];
-      },
-    );
+     publishers =  await _apiService.getPublishers() ?? [];
+    // await Future.delayed(const Duration(seconds: 2)).then(
+    //   (value) {
+    //      publishers = [
+    //     PublisherModel(
+    //       id: 1,
+    //       name: 'The publisher name ',
+    //      address: 'Address felan felan Address felan felan '
+    //     ),
+    //      PublisherModel(
+    //       id: 2,
+    //       name: 'The 2nd publisher with a bit longer name',
+    //      address: 'Address felan felan Address felan felan longer address longer address '
+    //     ),
+    //   ];
+    //   },
+    // );
    
     isLoading = false;
     notifyListeners();

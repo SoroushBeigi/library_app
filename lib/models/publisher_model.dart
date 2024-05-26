@@ -10,14 +10,14 @@ class PublisherModel {
   });
 
   PublisherModel.fromJson(Map<String, dynamic> json) {
-    if (json["id"] is int) {
-      id = json["id"];
+    if (json["Id"] is int) {
+      id = json["Id"];
     }
-    if (json["address"] is String) {
-      address = json["address"];
+    if (json["Address"] is String) {
+      address = json["Address"];
     }
-    if (json["name"] is String) {
-      name = json["name"];
+    if (json["Name"] is String) {
+      name = json["Name"];
     }
   }
 }
