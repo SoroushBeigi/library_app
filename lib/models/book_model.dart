@@ -1,5 +1,6 @@
 class BookModel {
   int? id;
+  int? publisherId;
   double? price;
   String? name;
   String? genre;
@@ -7,6 +8,7 @@ class BookModel {
 
   BookModel({
     this.id,
+    int? publisherId,
     this.price,
     this.name,
     this.genre,

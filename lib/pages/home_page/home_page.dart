@@ -31,6 +31,7 @@ class __HomeScreenState extends State<_HomeScreen> {
     super.initState();
     final provider = context.read<HomeProvider>();
     provider.getBooks();
+    provider.getPublishers();
   }
 
   @override
@@ -42,7 +43,7 @@ class __HomeScreenState extends State<_HomeScreen> {
         child: Scaffold(
           floatingActionButton: FloatingActionButton(
             child: const Icon(Icons.add),
-            onPressed: () => provider.addItem(),
+            onPressed: () => provider.addItem(context),
           ),
           appBar: AppBar(
             backgroundColor: Theme.of(context).colorScheme.primaryContainer,

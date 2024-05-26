@@ -3,6 +3,7 @@ import 'package:library_app/models/book_model.dart';
 import 'package:library_app/models/employee_model.dart';
 import 'package:library_app/models/member_model.dart';
 import 'package:library_app/models/publisher_model.dart';
+import 'package:library_app/pages/home_page/widgets/dialogs/book_dialog.dart';
 import 'package:library_app/services/dio.dart';
 
 class HomeProvider extends ChangeNotifier {
@@ -59,16 +60,52 @@ class HomeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> addItem() async {
+  Future<void> addItem(BuildContext context) async {
     switch (selectedTab) {
       case 0:
-       
+        showDialog(
+          context: context,
+          builder: (context) => BookDialog(
+            onPressed: addBook,
+            isEditing: false,
+            publishers: publishers,
+          ),
+        );
       case 1:
-       
       case 2:
-       
       case 3:
-       
+    }
+  }
+
+  Future<void> editItem(BuildContext context, BookModel model) async {
+    switch (selectedTab) {
+      case 0:
+        showDialog(
+          context: context,
+          builder: (context) => BookDialog(
+            onPressed: editBook,
+            isEditing: true,
+            bookModel: model,
+            publishers: publishers,
+          ),
+        );
+        print('reached case 0');
+      case 1:
+      case 2:
+      case 3:
+    }
+  }
+
+
+  addBook(BookModel? model) {
+    if(model!=null){
+      _apiService.addBook(model);
+    }
+  }
+
+  editBook(BookModel? model) {
+    if(model!=null){
+      _apiService.editBook(model);
     }
   }
 }

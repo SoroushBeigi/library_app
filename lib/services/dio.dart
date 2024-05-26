@@ -47,7 +47,7 @@ class ApiService {
     }
   }
 
-    Future<List<PublisherModel>?> getPublishers() async {
+  Future<List<PublisherModel>?> getPublishers() async {
     try {
       final response = await _dio.get(
         AppConstants.mainUrl + AppConstants.publishersEndpoint,
@@ -59,6 +59,23 @@ class ApiService {
     } catch (e) {
       return null;
     }
+  }
+
+  Future<void> addBook(BookModel model) async {
+    final response = await _dio
+        .post(AppConstants.mainUrl + AppConstants.booksEndpoint, data: {
+      'Name': model.name,
+      'Genre': model.genre,
+      'Price': model.price,
+    });
+  }
+    Future<void> editBook(BookModel model) async {
+    final response = await _dio
+        .post(AppConstants.mainUrl + AppConstants.booksEndpoint, data: {
+      'Name': model.name,
+      'Genre': model.genre,
+      'Price': model.price,
+    });
   }
 
   Future<String?> register(String userName, String password) async {}
