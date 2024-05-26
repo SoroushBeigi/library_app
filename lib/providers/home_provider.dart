@@ -4,6 +4,7 @@ import 'package:library_app/models/employee_model.dart';
 import 'package:library_app/models/member_model.dart';
 import 'package:library_app/models/publisher_model.dart';
 import 'package:library_app/pages/home_page/widgets/dialogs/book_dialog.dart';
+import 'package:library_app/pages/home_page/widgets/dialogs/publisher_dialog.dart';
 import 'package:library_app/services/dio.dart';
 
 class HomeProvider extends ChangeNotifier {
@@ -72,7 +73,15 @@ class HomeProvider extends ChangeNotifier {
           ),
         );
       case 1:
+     
       case 2:
+      showDialog(
+          context: context,
+          builder: (context) => PublisherDialog(
+            onPressed: addPublisher,
+            isEditing: false,
+          ),
+        );
       case 3:
     }
   }
@@ -89,9 +98,15 @@ class HomeProvider extends ChangeNotifier {
             publishers: publishers,
           ),
         );
-        print('reached case 0');
       case 1:
       case 2:
+      showDialog(
+          context: context,
+          builder: (context) => PublisherDialog(
+            onPressed: editPublisher,
+            isEditing: true,
+          ),
+        );
       case 3:
     }
   }
@@ -106,6 +121,18 @@ class HomeProvider extends ChangeNotifier {
   editBook(BookModel? model) {
     if(model!=null){
       _apiService.editBook(model);
+    }
+  }
+
+  addPublisher(PublisherModel? model) {
+    if(model!=null){
+      _apiService.addPublisher(model);
+    }
+  }
+
+  editPublisher(PublisherModel? model) {
+    if(model!=null){
+      _apiService.editPublisher(model);
     }
   }
 }
