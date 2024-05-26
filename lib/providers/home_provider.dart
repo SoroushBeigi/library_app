@@ -33,27 +33,6 @@ class HomeProvider extends ChangeNotifier {
 
   Future<void> getBooks() async {
     books =  await _apiService.getBooks() ?? [];
-    // await Future.delayed(const Duration(seconds: 2)).then(
-    //   (value) {
-    //      books = [
-    //     BookModel(
-    //       id: 1,
-    //       name: 'The books name is felan',
-    //       genre: 'science finction',
-    //       price: 20000,
-    //       takenBy: 'Soroush Beigi',
-    //     ),
-    //     BookModel(
-    //       id: 2,
-    //       name: 'The second books name is felan',
-    //       genre: 'science bla bla',
-    //       price: 150000,
-    //       takenBy: 'Mohammad Beigi',
-    //     ),
-    //   ];
-      // },
-    // );
-   
     isLoading = false;
     notifyListeners();
   }
@@ -61,30 +40,31 @@ class HomeProvider extends ChangeNotifier {
   Future<void> getMembers() async {
     // List<BookModel>? result = await _apiService.getBooks();
     // books = result ?? [];
-    await Future.delayed(const Duration(seconds: 2)).then(
-      (value) {
-         members = [
-        MemberModel(
-          id: 1,
-          firstName: 'Soroush',
-          lastName: 'Masoum Beigi',
-          address: 'Address Address  Address Address AddressAddress Address',
-          dateJoined: '2024-01-01',
-          email: 'sbeygi712@gmail.com',
-          phoneNumber: '09101013254'
-        ),
-         MemberModel(
-          id: 2,
-          firstName: 'Soroush',
-          lastName: 'Masoum Beigi',
-          address: 'Address Address Address',
-          dateJoined: '2024-01-01',
-          email: 'sbeygi712@gmail.com',
-          phoneNumber: '09101013254'
-        ),
-      ];
-      },
-    );
+     members =  await _apiService.getMembers() ?? [];
+    // await Future.delayed(const Duration(seconds: 2)).then(
+    //   (value) {
+    //      members = [
+    //     MemberModel(
+    //       id: 1,
+    //       firstName: 'Soroush',
+    //       lastName: 'Masoum Beigi',
+    //       address: 'Address Address  Address Address AddressAddress Address',
+    //       dateJoined: '2024-01-01',
+    //       email: 'sbeygi712@gmail.com',
+    //       phoneNumber: '09101013254'
+    //     ),
+    //      MemberModel(
+    //       id: 2,
+    //       firstName: 'Soroush',
+    //       lastName: 'Masoum Beigi',
+    //       address: 'Address Address Address',
+    //       dateJoined: '2024-01-01',
+    //       email: 'sbeygi712@gmail.com',
+    //       phoneNumber: '09101013254'
+    //     ),
+    //   ];
+    //   },
+    // );
    
     isLoading = false;
     notifyListeners();

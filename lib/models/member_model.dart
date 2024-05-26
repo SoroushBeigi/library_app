@@ -18,26 +18,26 @@ class MemberModel {
   });
 
     MemberModel.fromJson(Map<String, dynamic> json) {
-    if(json["id"] is int) {
-      id = json["id"];
+    if(json["Id"] is int) {
+      id = json["Id"];
     }
-    if(json["address"] is String) {
-      address = json["address"];
+    if(json["Address"] is String) {
+      address = json["Address"];
     }
-    if(json["firstName"] is String) {
-      firstName = json["firstName"];
+    if(json["FirstName"] is String) {
+      firstName = json["FirstName"];
     }
-    if(json["lastName"] is String) {
-      lastName = json["lastName"];
+    if(json["LastName"] is String) {
+      lastName = json["LastName"];
     }
-    if(json["dateJoined"] is String) {
-      dateJoined = json["dateJoined"];
+    if(json["DateJoined"] is String) {
+      dateJoined = json["DateJoined"];
     }
-    if(json["phoneNumber"] is String) {
-      phoneNumber = json["phoneNumber"];
+    if(json["Phone"] is String) {
+      phoneNumber = json["Phone"];
     }
-    if(json["email"] is String) {
-      email = json["email"];
+    if(json["Email"] is String) {
+      email = json["Email"];
     }
   }
 }

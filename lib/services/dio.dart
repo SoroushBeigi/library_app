@@ -1,19 +1,30 @@
 import 'package:dio/dio.dart';
 import 'package:library_app/core/constants.dart';
 import 'package:library_app/models/book_model.dart';
+import 'package:library_app/models/member_model.dart';
 
 class ApiService {
-  Dio _dio = Dio();
+  final Dio _dio = Dio();
   Future<List<BookModel>?> getBooks() async {
-// print('Response status: ${response.statusCode}');
-    // print('Response body: ${response.body}');
     try {
     final response = await _dio.get(
-    AppConstants.mainUrl + AppConstants.getBooksEndpoint,
+    AppConstants.mainUrl + AppConstants.booksEndpoint,
     );
     final List<BookModel> books = (response.data as List).map((e) => BookModel.fromJson(e)).toList();
     print(books[0].name);
     return books;
+    } catch (e) {
+      return null;
+    }
+  }
+
+    Future<List<MemberModel>?> getMembers() async {
+    try {
+    final response = await _dio.get(
+    AppConstants.mainUrl + AppConstants.membersEndpoint,
+    );
+    final List<MemberModel> members = (response.data as List).map((e) => MemberModel.fromJson(e)).toList();
+    return members;
     } catch (e) {
       return null;
     }
