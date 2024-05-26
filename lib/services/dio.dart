@@ -8,16 +8,16 @@ import 'package:library_app/models/publisher_model.dart';
 class ApiService {
   final Dio _dio = Dio();
   Future<List<BookModel>?> getBooks() async {
-    // try {
+    try {
       final response = await _dio.get(
         AppConstants.mainUrl + AppConstants.booksEndpoint,
       );
       final List<BookModel> books =
           (response.data as List).map((e) => BookModel.fromJson(e)).toList();
       return books;
-    // } catch (e) {
-    //   return null;
-    // }
+    } catch (e) {
+      return null;
+    }
   }
 
   Future<List<MemberModel>?> getMembers() async {
@@ -80,10 +80,12 @@ class ApiService {
 
    Future<void> addPublisher(PublisherModel model) async {
     final response = await _dio
-        .post(AppConstants.mainUrl + AppConstants.publishersEndpoint, data: {
+        .post(AppConstants.mainUrl + AppConstants.publishersEndpoint +'/', data: {
       'Name': model.name,
       'Address': model.address,
-    });
+    },
+    options: Options(headers: {"Content-Type": "application/json"}));
+    print(response.data);
   }
     Future<void> editPublisher(PublisherModel model) async {
     final response = await _dio

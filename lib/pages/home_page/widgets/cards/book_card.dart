@@ -27,9 +27,9 @@ class BookCard extends StatelessWidget {
         children: [
           Column(
             children: [
-              IconButton(onPressed: () {
-                Provider.of<HomeProvider>(context,listen: false).editItem(context,model);
-              }, icon: const Icon(Icons.edit)),
+              IconButton(onPressed: () =>
+                Provider.of<HomeProvider>(context,listen: false).editItem(context,model),
+               icon: const Icon(Icons.edit)),
               IconButton(onPressed: () {}, icon: const Icon(Icons.delete)),
             ],
           ),

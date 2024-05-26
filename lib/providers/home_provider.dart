@@ -86,7 +86,7 @@ class HomeProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> editItem(BuildContext context, BookModel model) async {
+  Future<void> editItem(BuildContext context, dynamic model) async {
     switch (selectedTab) {
       case 0:
         showDialog(
@@ -104,6 +104,7 @@ class HomeProvider extends ChangeNotifier {
           context: context,
           builder: (context) => PublisherDialog(
             onPressed: editPublisher,
+            publisherModel: model,
             isEditing: true,
           ),
         );
