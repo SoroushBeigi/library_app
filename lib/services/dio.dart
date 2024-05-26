@@ -14,7 +14,6 @@ class ApiService {
       );
       final List<BookModel> books =
           (response.data as List).map((e) => BookModel.fromJson(e)).toList();
-      print(books[0].name);
       return books;
     } catch (e) {
       return null;

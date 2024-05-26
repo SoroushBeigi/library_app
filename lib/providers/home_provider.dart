@@ -13,117 +13,62 @@ class HomeProvider extends ChangeNotifier {
   List<MemberModel> members = [];
   List<PublisherModel> publishers = [];
   List<EmployeeModel> employees = [];
-  
-  int selectedTab=0;
 
-  void onTabChanged(int index){
-    isLoading=true;
+  int selectedTab = 0;
+
+  void onTabChanged(int index) {
+    isLoading = true;
     notifyListeners();
-    switch(index){
+    switch (index) {
       case 0:
-      getBooks();
+        selectedTab = 0;
+        getBooks();
       case 1:
-      getMembers();
+        getMembers();
+        selectedTab = 1;
       case 2:
-      getPublishers();
+        getPublishers();
+        selectedTab = 2;
       case 3:
-      getEmployees();
+        getEmployees();
+        selectedTab = 3;
     }
   }
 
   Future<void> getBooks() async {
-    books =  await _apiService.getBooks() ?? [];
+    books = await _apiService.getBooks() ?? [];
     isLoading = false;
     notifyListeners();
   }
 
   Future<void> getMembers() async {
-    // List<BookModel>? result = await _apiService.getBooks();
-    // books = result ?? [];
-     members =  await _apiService.getMembers() ?? [];
-    // await Future.delayed(const Duration(seconds: 2)).then(
-    //   (value) {
-    //      members = [
-    //     MemberModel(
-    //       id: 1,
-    //       firstName: 'Soroush',
-    //       lastName: 'Masoum Beigi',
-    //       address: 'Address Address  Address Address AddressAddress Address',
-    //       dateJoined: '2024-01-01',
-    //       email: 'sbeygi712@gmail.com',
-    //       phoneNumber: '09101013254'
-    //     ),
-    //      MemberModel(
-    //       id: 2,
-    //       firstName: 'Soroush',
-    //       lastName: 'Masoum Beigi',
-    //       address: 'Address Address Address',
-    //       dateJoined: '2024-01-01',
-    //       email: 'sbeygi712@gmail.com',
-    //       phoneNumber: '09101013254'
-    //     ),
-    //   ];
-    //   },
-    // );
-   
+    members = await _apiService.getMembers() ?? [];
     isLoading = false;
     notifyListeners();
   }
 
   Future<void> getPublishers() async {
-    // List<BookModel>? result = await _apiService.getBooks();
-    // books = result ?? [];
-     publishers =  await _apiService.getPublishers() ?? [];
-    // await Future.delayed(const Duration(seconds: 2)).then(
-    //   (value) {
-    //      publishers = [
-    //     PublisherModel(
-    //       id: 1,
-    //       name: 'The publisher name ',
-    //      address: 'Address felan felan Address felan felan '
-    //     ),
-    //      PublisherModel(
-    //       id: 2,
-    //       name: 'The 2nd publisher with a bit longer name',
-    //      address: 'Address felan felan Address felan felan longer address longer address '
-    //     ),
-    //   ];
-    //   },
-    // );
-   
+    publishers = await _apiService.getPublishers() ?? [];
     isLoading = false;
     notifyListeners();
   }
 
   Future<void> getEmployees() async {
-    // List<BookModel>? result = await _apiService.getBooks();
-    // books = result ?? [];
-    await Future.delayed(const Duration(seconds: 2)).then(
-      (value) {
-         employees = [
-        EmployeeModel(
-          id: 1,
-          firstName: 'Soroush',
-          lastName: 'Beigi',
-          dateJoined: '2024-01-01',
-          position: 'Worker',
-          salary: 2000.5,
-        ),
-         EmployeeModel(
-          id: 2,
-          firstName: 'Ali',
-          lastName: 'Jafari',
-          dateJoined: '2020-01-01',
-          position: 'Worker',
-          salary: 3500,
-        )
-      ];
-      },
-    );
-   
+    employees = await _apiService.getEmployees() ?? [];
     isLoading = false;
     notifyListeners();
   }
-  
- 
+
+  Future<void> addItem() async {
+    switch (selectedTab) {
+      case 0:
+       
+      case 1:
+       
+      case 2:
+       
+      case 3:
+       
+    }
+  }
 }

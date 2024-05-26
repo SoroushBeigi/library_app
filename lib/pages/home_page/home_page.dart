@@ -40,14 +40,19 @@ class __HomeScreenState extends State<_HomeScreen> {
       child: DefaultTabController(
         length: 4,
         child: Scaffold(
+          floatingActionButton: FloatingActionButton(
+            child: const Icon(Icons.add),
+            onPressed: () => provider.addItem(),
+          ),
           appBar: AppBar(
+            backgroundColor: Theme.of(context).colorScheme.primaryContainer,
             bottom: TabBar(
               tabs: const [
                 Tab(
                   icon: Column(
                     children: [
                       Icon(Icons.book),
-                      Text('Books'),
+                      FittedBox(child: Text('Books')),
                     ],
                   ),
                 ),
@@ -55,7 +60,7 @@ class __HomeScreenState extends State<_HomeScreen> {
                   icon: Column(
                     children: [
                       Icon(Icons.person),
-                      Text('Members'),
+                      FittedBox(child: Text('Members')),
                     ],
                   ),
                 ),
@@ -63,7 +68,7 @@ class __HomeScreenState extends State<_HomeScreen> {
                   icon: Column(
                     children: [
                       Icon(Icons.home_work),
-                      Text('Publishers'),
+                      FittedBox(child: Text('Publishers')),
                     ],
                   ),
                 ),
@@ -71,7 +76,7 @@ class __HomeScreenState extends State<_HomeScreen> {
                   icon: Column(
                     children: [
                       Icon(Icons.emoji_people),
-                      Text('Employees'),
+                      FittedBox(child: Text('Employees')),
                     ],
                   ),
                 ),
