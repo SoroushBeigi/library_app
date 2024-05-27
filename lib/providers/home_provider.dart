@@ -5,6 +5,7 @@ import 'package:library_app/models/employee_model.dart';
 import 'package:library_app/models/member_model.dart';
 import 'package:library_app/models/publisher_model.dart';
 import 'package:library_app/pages/home_page/widgets/dialogs/book_dialog.dart';
+import 'package:library_app/pages/home_page/widgets/dialogs/employee_dialog.dart';
 import 'package:library_app/pages/home_page/widgets/dialogs/publisher_dialog.dart';
 import 'package:library_app/services/dio.dart';
 
@@ -19,9 +20,7 @@ class HomeProvider extends ChangeNotifier {
 
   int selectedTab = 0;
 
-  void reload()=>
-    onTabChanged(selectedTab);
-  
+  void reload() => onTabChanged(selectedTab);
 
   void onTabChanged(int index) {
     isLoading = true;
@@ -77,19 +76,26 @@ class HomeProvider extends ChangeNotifier {
             publishers: publishers,
           ),
         );
-        if(isDone) reload();
+        if (isDone) reload();
       case 1:
-     
       case 2:
-      final bool isDone = await showDialog(
+        final bool isDone = await showDialog(
           context: context,
           builder: (context) => PublisherDialog(
             onPressed: addPublisher,
             isEditing: false,
           ),
         );
-        if(isDone) reload();
+        if (isDone) reload();
       case 3:
+        final bool isDone = await showDialog(
+          context: context,
+          builder: (context) => EmployeeDialog(
+            onPressed: addEmployee,
+            isEditing: false,
+          ),
+        );
+        if (isDone) reload();
     }
   }
 
@@ -105,10 +111,10 @@ class HomeProvider extends ChangeNotifier {
             publishers: publishers,
           ),
         );
-        if(isDone) reload();
+        if (isDone) reload();
       case 1:
       case 2:
-      final bool isDone = await showDialog(
+        final bool isDone = await showDialog(
           context: context,
           builder: (context) => PublisherDialog(
             onPressed: editPublisher,
@@ -116,8 +122,17 @@ class HomeProvider extends ChangeNotifier {
             isEditing: true,
           ),
         );
-        if(isDone) reload();
+        if (isDone) reload();
       case 3:
+        final bool isDone = await showDialog(
+          context: context,
+          builder: (context) => EmployeeDialog(
+            onPressed: editEmployee,
+            employeeModel: model,
+            isEditing: true,
+          ),
+        );
+        if (isDone) reload();
     }
   }
 
@@ -125,37 +140,50 @@ class HomeProvider extends ChangeNotifier {
     switch (selectedTab) {
       case 0:
         final bool isDone = await _apiService.deleteBook(model);
-        if(isDone) reload();
+        if (isDone) reload();
       case 1:
       case 2:
-       final bool isDone = await _apiService.deletePublisher(model);
-        if(isDone) reload();
+        final bool isDone = await _apiService.deletePublisher(model);
+        if (isDone) reload();
       case 3:
+        final bool isDone = await _apiService.deleteEmployee(model);
+        if (isDone) reload();
     }
   }
 
-
   addBook(BookModel? model) {
-    if(model!=null){
+    if (model != null) {
       _apiService.addBook(model);
     }
   }
 
   editBook(BookModel? model) {
-    if(model!=null){
+    if (model != null) {
       _apiService.editBook(model);
     }
   }
 
   addPublisher(PublisherModel? model) {
-    if(model!=null){
+    if (model != null) {
       _apiService.addPublisher(model);
     }
   }
 
   editPublisher(PublisherModel? model) {
-    if(model!=null){
+    if (model != null) {
       _apiService.editPublisher(model);
+    }
+  }
+
+  addEmployee(EmployeeModel? model) {
+    if (model != null) {
+      _apiService.addEmployee(model);
+    }
+  }
+
+  editEmployee(EmployeeModel? model) {
+    if (model != null) {
+      _apiService.editEmployee(model);
     }
   }
 }

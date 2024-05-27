@@ -78,6 +78,7 @@ class BookDialog extends StatelessWidget {
           onPressed: () {
             onPressed(
               BookModel(
+                id: bookModel?.id,
                 name: nameController.text,
                 genre: genreController.text,
                 price: double.parse(priceController.text),

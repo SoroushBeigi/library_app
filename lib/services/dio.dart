@@ -11,7 +11,8 @@ class ApiService {
     //'https://cors-anywhere.herokuapp.com/'
     try {
       final response = await _dio.get(
-        AppConstants.mainUrl + AppConstants.booksEndpoint,
+        AppConstants.mainUrl+AppConstants.booksEndpoint+'/',
+        options: Options(headers: {'Content-Type': 'application/json'})
       );
       final List<BookModel> books =
           (response.data as List).map((e) => BookModel.fromJson(e)).toList();
@@ -23,7 +24,7 @@ class ApiService {
 
   Future<void> addBook(BookModel model) async {
     final response =
-        await _dio.post(AppConstants.mainUrl + AppConstants.booksEndpoint + '/',
+        await _dio.post('${AppConstants.mainUrl}${AppConstants.booksEndpoint}/',
             data: {
               'Name': model.name,
               'Genre': model.genre,
@@ -34,17 +35,19 @@ class ApiService {
   }
 
   Future<void> editBook(BookModel model) async {
-    final response = await _dio
-        .put(AppConstants.mainUrl + AppConstants.booksEndpoint, data: {
-      'Name': model.name,
-      'Genre': model.genre,
-      'Price': model.price,
-    });
+    final response =
+        await _dio.put(AppConstants.mainUrl + AppConstants.booksEndpoint,
+            data: {
+              'Name': model.name,
+              'Genre': model.genre,
+              'Price': model.price,
+            },
+            options: Options(headers: {'Content-Type': 'application/json'}));
   }
 
   Future<bool> deleteBook(BookModel model) async {
     final response = await _dio.delete(
-        AppConstants.mainUrl + AppConstants.booksEndpoint + '/${model.id}');
+        '${AppConstants.mainUrl}${AppConstants.booksEndpoint}/${model.id}',);
     if (response.statusCode == 200) {
       return true;
     } else {
@@ -55,8 +58,8 @@ class ApiService {
   Future<List<MemberModel>?> getMembers() async {
     try {
       final response = await _dio.get(
-        AppConstants.mainUrl + AppConstants.membersEndpoint,
-      );
+          AppConstants.mainUrl + AppConstants.membersEndpoint + '/',
+          options: Options(headers: {'Content-Type': 'application/json'}));
       final List<MemberModel> members =
           (response.data as List).map((e) => MemberModel.fromJson(e)).toList();
       return members;
@@ -68,8 +71,8 @@ class ApiService {
   Future<List<PublisherModel>?> getPublishers() async {
     try {
       final response = await _dio.get(
-        AppConstants.mainUrl + AppConstants.publishersEndpoint,
-      );
+          AppConstants.mainUrl + AppConstants.publishersEndpoint + '/',
+          options: Options(headers: {'Content-Type': 'application/json'}));
       final List<PublisherModel> publishers = (response.data as List)
           .map((e) => PublisherModel.fromJson(e))
           .toList();
@@ -81,27 +84,27 @@ class ApiService {
 
   Future<void> addPublisher(PublisherModel model) async {
     final response = await _dio.post(
-        AppConstants.mainUrl + AppConstants.publishersEndpoint + '/',
+        '${AppConstants.mainUrl}${AppConstants.publishersEndpoint}/',
         data: {
           'Name': model.name,
           'Address': model.address,
         },
         options: Options(headers: {"Content-Type": "application/json"}));
-    print(response.data);
   }
 
   Future<void> editPublisher(PublisherModel model) async {
     final response = await _dio.put(
         '${AppConstants.mainUrl}${AppConstants.publishersEndpoint}/${model.id}',
+        options: Options(headers: {'Content-Type': 'application/json'}),
         data: {
           'Name': model.name,
           'Address': model.address,
         });
   }
 
-   Future<bool> deletePublisher(PublisherModel model) async {
+  Future<bool> deletePublisher(PublisherModel model) async {
     final response = await _dio.delete(
-        AppConstants.mainUrl + AppConstants.publishersEndpoint + '/${model.id}');
+      '${AppConstants.mainUrl}${AppConstants.publishersEndpoint}/${model.id}',);
     if (response.statusCode == 200) {
       return true;
     } else {
@@ -109,11 +112,11 @@ class ApiService {
     }
   }
 
-    Future<List<EmployeeModel>?> getEmployees() async {
+  Future<List<EmployeeModel>?> getEmployees() async {
     try {
       final response = await _dio.get(
-        AppConstants.mainUrl + AppConstants.employeesEndpoint,
-      );
+          AppConstants.mainUrl + AppConstants.employeesEndpoint + '/',
+          options: Options(headers: {'Content-Type': 'application/json'}));
       final List<EmployeeModel> employees = (response.data as List)
           .map((e) => EmployeeModel.fromJson(e))
           .toList();
@@ -124,33 +127,36 @@ class ApiService {
   }
 
   Future<void> addEmployee(EmployeeModel model) async {
-    final response =
-        await _dio.post(AppConstants.mainUrl + AppConstants.employeesEndpoint + '/',
-            data: {
-              'FirstName': model.firstName,
-              'LastName': model.lastName,
-              'DateJoined': model.dateJoined,
-              'Salary': model.salary,
-              'Position':model.position,
-            },
-            options: Options(headers: {'Content-Type': 'application/json'}));
+    final response = await _dio.post(
+        '${AppConstants.mainUrl}${AppConstants.employeesEndpoint}/',
+        data: {
+          'FirstName': model.firstName,
+          'LastName': model.lastName,
+          'DateJoined': model.dateJoined,
+          'Salary': model.salary,
+          'Position': model.position,
+        },
+        options: Options(headers: {'Content-Type': 'application/json'}));
   }
 
-    Future<void> editEmpoyee(EmployeeModel model) async {
+  Future<void> editEmployee(EmployeeModel model) async {
     final response = await _dio.put(
         '${AppConstants.mainUrl}${AppConstants.employeesEndpoint}/${model.id}',
+        options: Options(headers: {'Content-Type': 'application/json'}),
         data: {
-              'FirstName': model.firstName,
-              'LastName': model.lastName,
-              'DateJoined': model.dateJoined,
-              'Salary': model.salary,
-              'Position':model.position,
+          'FirstName': model.firstName,
+          'LastName': model.lastName,
+          'DateJoined': model.dateJoined,
+          'Salary': model.salary,
+          'Position': model.position,
         });
   }
 
   Future<bool> deleteEmployee(EmployeeModel model) async {
     final response = await _dio.delete(
-        AppConstants.mainUrl + AppConstants.employeesEndpoint + '/${model.id}');
+      '${AppConstants.mainUrl}${AppConstants.employeesEndpoint}/${model.id}',
+    );
+
     if (response.statusCode == 200) {
       return true;
     } else {

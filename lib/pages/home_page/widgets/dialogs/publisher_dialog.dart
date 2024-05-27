@@ -53,7 +53,7 @@ class PublisherDialog extends StatelessWidget {
           onPressed: () {
             onPressed(
               PublisherModel(
-                id: publisherModel?.id ?? 0,
+                id: publisherModel?.id,
                 name: nameController.text,
                 address: addressController.text,
               ),
