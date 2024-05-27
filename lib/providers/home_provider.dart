@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:library_app/models/book_model.dart';
 import 'package:library_app/models/employee_model.dart';
 import 'package:library_app/models/member_model.dart';
@@ -17,6 +18,10 @@ class HomeProvider extends ChangeNotifier {
   List<EmployeeModel> employees = [];
 
   int selectedTab = 0;
+
+  void reload()=>
+    onTabChanged(selectedTab);
+  
 
   void onTabChanged(int index) {
     isLoading = true;
@@ -64,7 +69,7 @@ class HomeProvider extends ChangeNotifier {
   Future<void> addItem(BuildContext context) async {
     switch (selectedTab) {
       case 0:
-        showDialog(
+        final bool isDone = await showDialog(
           context: context,
           builder: (context) => BookDialog(
             onPressed: addBook,
@@ -72,16 +77,18 @@ class HomeProvider extends ChangeNotifier {
             publishers: publishers,
           ),
         );
+        if(isDone) reload();
       case 1:
      
       case 2:
-      showDialog(
+      final bool isDone = await showDialog(
           context: context,
           builder: (context) => PublisherDialog(
             onPressed: addPublisher,
             isEditing: false,
           ),
         );
+        if(isDone) reload();
       case 3:
     }
   }
@@ -89,7 +96,7 @@ class HomeProvider extends ChangeNotifier {
   Future<void> editItem(BuildContext context, dynamic model) async {
     switch (selectedTab) {
       case 0:
-        showDialog(
+        final bool isDone = await showDialog(
           context: context,
           builder: (context) => BookDialog(
             onPressed: editBook,
@@ -98,9 +105,10 @@ class HomeProvider extends ChangeNotifier {
             publishers: publishers,
           ),
         );
+        if(isDone) reload();
       case 1:
       case 2:
-      showDialog(
+      final bool isDone = await showDialog(
           context: context,
           builder: (context) => PublisherDialog(
             onPressed: editPublisher,
@@ -108,6 +116,7 @@ class HomeProvider extends ChangeNotifier {
             isEditing: true,
           ),
         );
+        if(isDone) reload();
       case 3:
     }
   }

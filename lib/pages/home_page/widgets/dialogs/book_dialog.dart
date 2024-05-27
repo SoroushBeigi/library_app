@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:library_app/models/book_model.dart';
 import 'package:library_app/models/publisher_model.dart';
-import 'package:library_app/providers/home_provider.dart';
-import 'package:provider/provider.dart';
 
 class BookDialog extends StatelessWidget {
   final bool isEditing;
@@ -77,10 +75,11 @@ class BookDialog extends StatelessWidget {
         TextButton(
           onPressed: () => onPressed(
             BookModel(
-                name: nameController.text,
-                genre: genreController.text,
-                price: double.parse(priceController.text),
-                publisherId: selectedPublisherId),
+              name: nameController.text,
+              genre: genreController.text,
+              price: double.parse(priceController.text),
+              publisherId: selectedPublisherId,
+            ),
           ),
           child: Text(isEditing ? 'Edit' : 'Add'),
         ),

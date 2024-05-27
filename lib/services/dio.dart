@@ -6,11 +6,13 @@ import 'package:library_app/models/member_model.dart';
 import 'package:library_app/models/publisher_model.dart';
 
 class ApiService {
-  final Dio _dio = Dio();
+  final Dio _dio =
+      Dio();
   Future<List<BookModel>?> getBooks() async {
+    //'https://cors-anywhere.herokuapp.com/'
     try {
       final response = await _dio.get(
-        AppConstants.mainUrl + AppConstants.booksEndpoint,
+       AppConstants.mainUrl + AppConstants.booksEndpoint,
       );
       final List<BookModel> books =
           (response.data as List).map((e) => BookModel.fromJson(e)).toList();
@@ -69,7 +71,8 @@ class ApiService {
       'Price': model.price,
     });
   }
-    Future<void> editBook(BookModel model) async {
+
+  Future<void> editBook(BookModel model) async {
     final response = await _dio
         .put(AppConstants.mainUrl + AppConstants.booksEndpoint, data: {
       'Name': model.name,
@@ -78,21 +81,24 @@ class ApiService {
     });
   }
 
-   Future<void> addPublisher(PublisherModel model) async {
-    final response = await _dio
-        .post(AppConstants.mainUrl + AppConstants.publishersEndpoint +'/', data: {
-      'Name': model.name,
-      'Address': model.address,
-    },
-    options: Options(headers: {"Content-Type": "application/json"}));
+  Future<void> addPublisher(PublisherModel model) async {
+    final response = await _dio.post(
+        AppConstants.mainUrl + AppConstants.publishersEndpoint + '/',
+        data: {
+          'Name': model.name,
+          'Address': model.address,
+        },
+        options: Options(headers: {"Content-Type": "application/json"}));
     print(response.data);
   }
-    Future<void> editPublisher(PublisherModel model) async {
-    final response = await _dio
-        .put('${AppConstants.mainUrl}${AppConstants.publishersEndpoint}/${model.id}', data: {
-      'Name': model.name,
-      'Address': model.address,
-    });
+
+  Future<void> editPublisher(PublisherModel model) async {
+    final response = await _dio.put(
+        '${AppConstants.mainUrl}${AppConstants.publishersEndpoint}/${model.id}',
+        data: {
+          'Name': model.name,
+          'Address': model.address,
+        });
   }
 
   Future<String?> register(String userName, String password) async {}

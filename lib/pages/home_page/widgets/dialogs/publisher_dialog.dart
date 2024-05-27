@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:library_app/models/book_model.dart';
 import 'package:library_app/models/publisher_model.dart';
 
 class PublisherDialog extends StatelessWidget {
@@ -47,17 +46,21 @@ class PublisherDialog extends StatelessWidget {
           ]),
       actions: [
         TextButton(
-          onPressed: () => context.pop(),
+          onPressed: () => context.pop(false),
           child: const Text('Cancel'),
         ),
         TextButton(
-          onPressed: () => onPressed(
-            PublisherModel(
-              id: publisherModel?.id ?? 0,
-              name: nameController.text,
-              address: addressController.text,
-            ),
-          ),
+          onPressed: () {
+            onPressed(
+              PublisherModel(
+                id: publisherModel?.id ?? 0,
+                name: nameController.text,
+                address: addressController.text,
+              ),
+            );
+            context.pop(true);
+            
+          },
           child: Text(isEditing ? 'Edit' : 'Add'),
         ),
       ],
