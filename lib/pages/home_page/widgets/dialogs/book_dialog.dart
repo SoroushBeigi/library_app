@@ -61,7 +61,9 @@ class BookDialog extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           DropdownMenu(
-              onSelected: (value) => selectedPublisherId = value?.id,
+              onSelected: (value) {
+                selectedPublisherId = value?.id;
+              },
               dropdownMenuEntries: publishers
                   .map((e) => DropdownMenuEntry(value: e, label: e.name ?? ''))
                   .toList()),
@@ -69,18 +71,21 @@ class BookDialog extends StatelessWidget {
       ),
       actions: [
         TextButton(
-          onPressed: () => context.pop(),
+          onPressed: () => context.pop(false),
           child: const Text('Cancel'),
         ),
         TextButton(
-          onPressed: () => onPressed(
-            BookModel(
-              name: nameController.text,
-              genre: genreController.text,
-              price: double.parse(priceController.text),
-              publisherId: selectedPublisherId,
-            ),
-          ),
+          onPressed: () {
+            onPressed(
+              BookModel(
+                name: nameController.text,
+                genre: genreController.text,
+                price: double.parse(priceController.text),
+                publisherId: selectedPublisherId,
+              ),
+            );
+            context.pop(true);
+          },
           child: Text(isEditing ? 'Edit' : 'Add'),
         ),
       ],

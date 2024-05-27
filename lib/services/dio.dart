@@ -6,19 +6,49 @@ import 'package:library_app/models/member_model.dart';
 import 'package:library_app/models/publisher_model.dart';
 
 class ApiService {
-  final Dio _dio =
-      Dio();
+  final Dio _dio = Dio();
   Future<List<BookModel>?> getBooks() async {
     //'https://cors-anywhere.herokuapp.com/'
     try {
       final response = await _dio.get(
-       AppConstants.mainUrl + AppConstants.booksEndpoint,
+        AppConstants.mainUrl + AppConstants.booksEndpoint,
       );
       final List<BookModel> books =
           (response.data as List).map((e) => BookModel.fromJson(e)).toList();
       return books;
     } catch (e) {
       return null;
+    }
+  }
+
+  Future<void> addBook(BookModel model) async {
+    final response =
+        await _dio.post(AppConstants.mainUrl + AppConstants.booksEndpoint + '/',
+            data: {
+              'Name': model.name,
+              'Genre': model.genre,
+              'Price': model.price,
+              'PublisherId': model.publisherId,
+            },
+            options: Options(headers: {'Content-Type': 'application/json'}));
+  }
+
+  Future<void> editBook(BookModel model) async {
+    final response = await _dio
+        .put(AppConstants.mainUrl + AppConstants.booksEndpoint, data: {
+      'Name': model.name,
+      'Genre': model.genre,
+      'Price': model.price,
+    });
+  }
+
+  Future<bool> deleteBook(BookModel model) async {
+    final response = await _dio.delete(
+        AppConstants.mainUrl + AppConstants.booksEndpoint + '/${model.id}');
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
     }
   }
 
@@ -63,24 +93,6 @@ class ApiService {
     }
   }
 
-  Future<void> addBook(BookModel model) async {
-    final response = await _dio
-        .post(AppConstants.mainUrl + AppConstants.booksEndpoint, data: {
-      'Name': model.name,
-      'Genre': model.genre,
-      'Price': model.price,
-    });
-  }
-
-  Future<void> editBook(BookModel model) async {
-    final response = await _dio
-        .put(AppConstants.mainUrl + AppConstants.booksEndpoint, data: {
-      'Name': model.name,
-      'Genre': model.genre,
-      'Price': model.price,
-    });
-  }
-
   Future<void> addPublisher(PublisherModel model) async {
     final response = await _dio.post(
         AppConstants.mainUrl + AppConstants.publishersEndpoint + '/',
@@ -99,6 +111,16 @@ class ApiService {
           'Name': model.name,
           'Address': model.address,
         });
+  }
+
+   Future<bool> deletePublisher(PublisherModel model) async {
+    final response = await _dio.delete(
+        AppConstants.mainUrl + AppConstants.publishersEndpoint + '/${model.id}');
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   Future<String?> register(String userName, String password) async {}

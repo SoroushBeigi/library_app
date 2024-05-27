@@ -121,6 +121,19 @@ class HomeProvider extends ChangeNotifier {
     }
   }
 
+  Future<void> deleteItem(BuildContext context, dynamic model) async {
+    switch (selectedTab) {
+      case 0:
+        final bool isDone = await _apiService.deleteBook(model);
+        if(isDone) reload();
+      case 1:
+      case 2:
+       final bool isDone = await _apiService.deletePublisher(model);
+        if(isDone) reload();
+      case 3:
+    }
+  }
+
 
   addBook(BookModel? model) {
     if(model!=null){

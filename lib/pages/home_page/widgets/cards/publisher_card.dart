@@ -14,8 +14,7 @@ class PublisherCard extends StatelessWidget {
       margin: const EdgeInsets.all(8),
       decoration: BoxDecoration(
           borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(12),
-              bottomLeft: Radius.circular(12)),
+              topLeft: Radius.circular(12), bottomLeft: Radius.circular(12)),
           color: Theme.of(context).colorScheme.primaryContainer,
           border: Border(
             bottom: BorderSide(color: primary, width: 10),
@@ -27,8 +26,16 @@ class PublisherCard extends StatelessWidget {
         children: [
           Column(
             children: [
-              IconButton(onPressed: () => Provider.of<HomeProvider>(context,listen: false).editItem(context,model), icon: const Icon(Icons.edit)),
-              IconButton(onPressed: () {}, icon: const Icon(Icons.delete)),
+              IconButton(
+                  onPressed: () =>
+                      Provider.of<HomeProvider>(context, listen: false)
+                          .editItem(context, model),
+                  icon: const Icon(Icons.edit)),
+              IconButton(
+                  onPressed: () =>
+                      Provider.of<HomeProvider>(context, listen: false)
+                          .deleteItem(context, model),
+                  icon: const Icon(Icons.delete)),
             ],
           ),
           Expanded(

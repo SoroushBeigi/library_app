@@ -8,7 +8,7 @@ class BookModel {
 
   BookModel({
     this.id,
-    int? publisherId,
+    this.publisherId,
     this.price,
     this.name,
     this.genre,
