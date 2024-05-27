@@ -29,26 +29,29 @@ class _SplashScreenState extends State<_SplashScreen> {
     if (!provider.isLoaded) provider.load(context);
     return Scaffold(
       backgroundColor: Colors.brown,
-      body: Center(
-        child: Column(
-          children: [
-            Image.asset('assets/library.png'),
-            FittedBox(
-              child: Text(
-                'Library Database App',
-                style: Theme.of(context)
-                    .textTheme
-                    .displayMedium!
-                    .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Center(
+          child: Column(
+            children: [
+              Image.asset('assets/library.png'),
+              FittedBox(
+                child: Text(
+                  'Library Database App',
+                  style: Theme.of(context)
+                      .textTheme
+                      .displayMedium!
+                      .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+                ),
               ),
-            ),
-          ],
-        ).animate(effects: [
-          const FadeEffect(
-            duration: Duration(seconds: 3),
-          curve: Curves.easeOut,
-          )
-        ]),
+            ],
+          ).animate(effects: [
+            const FadeEffect(
+              duration: Duration(seconds: 3),
+            curve: Curves.easeOut,
+            )
+          ]),
+        ),
       ),
     );
   }

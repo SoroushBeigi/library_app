@@ -25,85 +25,93 @@ class _HomeScreen extends StatefulWidget {
   State<_HomeScreen> createState() => __HomeScreenState();
 }
 
-class __HomeScreenState extends State<_HomeScreen> {
+class __HomeScreenState extends State<_HomeScreen>
+    with SingleTickerProviderStateMixin {
+  late TabController tabController;
   @override
   void initState() {
     super.initState();
     final provider = context.read<HomeProvider>();
     provider.getBooks();
     provider.getPublishers();
+    tabController = TabController(vsync: this, length: 4);
+    tabController.addListener(() {
+      provider.selectedTab=tabController.index;
+      if (provider.selectedTab != tabController.index) {
+        provider.onTabChanged(tabController.index);
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     final provider = context.watch<HomeProvider>();
     return Center(
-      child: DefaultTabController(
-        length: 4,
-        child: Scaffold(
-          floatingActionButton: FloatingActionButton(
-            child: const Icon(Icons.add),
-            onPressed: () => provider.addItem(context),
-          ),
-          appBar: AppBar(
-            backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-            bottom: TabBar(
-              tabs: const [
-                Tab(
-                  icon: Column(
-                    children: [
-                      Icon(Icons.book),
-                      FittedBox(child: Text('Books')),
-                    ],
-                  ),
+      child: Scaffold(
+        floatingActionButton: FloatingActionButton(
+          child: const Icon(Icons.add),
+          onPressed: () => provider.addItem(context),
+        ),
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+          bottom: TabBar(
+            controller: tabController,
+            tabs: const [
+              Tab(
+                icon: Column(
+                  children: [
+                    Icon(Icons.book),
+                    FittedBox(child: Text('Books')),
+                  ],
                 ),
-                Tab(
-                  icon: Column(
-                    children: [
-                      Icon(Icons.person),
-                      FittedBox(child: Text('Members')),
-                    ],
-                  ),
+              ),
+              Tab(
+                icon: Column(
+                  children: [
+                    Icon(Icons.person),
+                    FittedBox(child: Text('Members')),
+                  ],
                 ),
-                Tab(
-                  icon: Column(
-                    children: [
-                      Icon(Icons.home_work),
-                      FittedBox(child: Text('Publishers')),
-                    ],
-                  ),
+              ),
+              Tab(
+                icon: Column(
+                  children: [
+                    Icon(Icons.home_work),
+                    FittedBox(child: Text('Publishers')),
+                  ],
                 ),
-                Tab(
-                  icon: Column(
-                    children: [
-                      Icon(Icons.emoji_people),
-                      FittedBox(child: Text('Employees')),
-                    ],
-                  ),
+              ),
+              Tab(
+                icon: Column(
+                  children: [
+                    Icon(Icons.emoji_people),
+                    FittedBox(child: Text('Employees')),
+                  ],
                 ),
-              ],
-              onTap: (value) {
-                provider.onTabChanged(value);
-              },
-            ),
-            title: const Text('Home Page'),
-          ),
-          body: TabBarView(
-            children: [
-              provider.isLoading
-                  ? const Center(child: CircularProgressIndicator())
-                  : _buildBookListView(),
-              provider.isLoading
-                  ? const Center(child: CircularProgressIndicator())
-                  : _buildMemberListView(),
-              provider.isLoading
-                  ? const Center(child: CircularProgressIndicator())
-                  : _buildPublisherListView(),
-              provider.isLoading
-                  ? const Center(child: CircularProgressIndicator())
-                  : _buildEmployeeListView(),
+              ),
             ],
+            onTap: (value) {
+              provider.onTabChanged(value);
+            },
           ),
+          title: const Text('Home Page'),
+        ),
+        body: TabBarView(
+          controller: tabController,
+          children: [
+            provider.isLoading
+                ? const Center(child: CircularProgressIndicator())
+                : _buildBookListView(),
+            provider.isLoading
+                ? const Center(child: CircularProgressIndicator())
+                : _buildMemberListView(),
+            provider.isLoading
+                ? const Center(child: CircularProgressIndicator())
+                : _buildPublisherListView(),
+            provider.isLoading
+                ? const Center(child: CircularProgressIndicator())
+                : _buildEmployeeListView(),
+          ],
         ),
       ),
     );

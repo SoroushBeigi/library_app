@@ -11,7 +11,6 @@ import 'package:library_app/services/dio.dart';
 
 class HomeProvider extends ChangeNotifier {
   final _apiService = ApiService();
-
   bool isLoading = true;
   List<BookModel> books = [];
   List<MemberModel> members = [];
@@ -20,7 +19,10 @@ class HomeProvider extends ChangeNotifier {
 
   int selectedTab = 0;
 
-  void reload() => onTabChanged(selectedTab);
+  void reload() {
+    print('Reloaded');
+    onTabChanged(selectedTab);
+  }
 
   void onTabChanged(int index) {
     isLoading = true;
