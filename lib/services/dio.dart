@@ -65,20 +65,6 @@ class ApiService {
     }
   }
 
-  Future<List<EmployeeModel>?> getEmployees() async {
-    try {
-      final response = await _dio.get(
-        AppConstants.mainUrl + AppConstants.employeesEndpoint,
-      );
-      final List<EmployeeModel> employees = (response.data as List)
-          .map((e) => EmployeeModel.fromJson(e))
-          .toList();
-      return employees;
-    } catch (e) {
-      return null;
-    }
-  }
-
   Future<List<PublisherModel>?> getPublishers() async {
     try {
       final response = await _dio.get(
@@ -116,6 +102,55 @@ class ApiService {
    Future<bool> deletePublisher(PublisherModel model) async {
     final response = await _dio.delete(
         AppConstants.mainUrl + AppConstants.publishersEndpoint + '/${model.id}');
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+    Future<List<EmployeeModel>?> getEmployees() async {
+    try {
+      final response = await _dio.get(
+        AppConstants.mainUrl + AppConstants.employeesEndpoint,
+      );
+      final List<EmployeeModel> employees = (response.data as List)
+          .map((e) => EmployeeModel.fromJson(e))
+          .toList();
+      return employees;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  Future<void> addEmployee(EmployeeModel model) async {
+    final response =
+        await _dio.post(AppConstants.mainUrl + AppConstants.employeesEndpoint + '/',
+            data: {
+              'FirstName': model.firstName,
+              'LastName': model.lastName,
+              'DateJoined': model.dateJoined,
+              'Salary': model.salary,
+              'Position':model.position,
+            },
+            options: Options(headers: {'Content-Type': 'application/json'}));
+  }
+
+    Future<void> editEmpoyee(EmployeeModel model) async {
+    final response = await _dio.put(
+        '${AppConstants.mainUrl}${AppConstants.employeesEndpoint}/${model.id}',
+        data: {
+              'FirstName': model.firstName,
+              'LastName': model.lastName,
+              'DateJoined': model.dateJoined,
+              'Salary': model.salary,
+              'Position':model.position,
+        });
+  }
+
+  Future<bool> deleteEmployee(EmployeeModel model) async {
+    final response = await _dio.delete(
+        AppConstants.mainUrl + AppConstants.employeesEndpoint + '/${model.id}');
     if (response.statusCode == 200) {
       return true;
     } else {
