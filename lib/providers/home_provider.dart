@@ -162,6 +162,8 @@ class HomeProvider extends ChangeNotifier {
         final bool isDone = await _apiService.deleteBook(model);
         if (isDone) reload();
       case 1:
+      final bool isDone = await _apiService.deleteMember(model);
+        if (isDone) reload();
       case 2:
         final bool isDone = await _apiService.deletePublisher(model);
         if (isDone) reload();

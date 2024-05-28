@@ -97,7 +97,7 @@ class ApiService {
             options: Options(headers: {'Content-Type': 'application/json'}));
   }
 
-  Future<bool> deleteMember(BookModel model) async {
+  Future<bool> deleteMember(MemberModel model) async {
     final response = await _dio.delete(
         '${AppConstants.mainUrl}${AppConstants.membersEndpoint}/${model.id}',);
     if (response.statusCode == 200) {
