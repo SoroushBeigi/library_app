@@ -6,6 +6,7 @@ import 'package:library_app/models/member_model.dart';
 import 'package:library_app/models/publisher_model.dart';
 import 'package:library_app/pages/home_page/widgets/dialogs/book_dialog.dart';
 import 'package:library_app/pages/home_page/widgets/dialogs/employee_dialog.dart';
+import 'package:library_app/pages/home_page/widgets/dialogs/member_dialog.dart';
 import 'package:library_app/pages/home_page/widgets/dialogs/publisher_dialog.dart';
 import 'package:library_app/services/dio.dart';
 
@@ -80,6 +81,14 @@ class HomeProvider extends ChangeNotifier {
         );
         if (isDone) reload();
       case 1:
+         final bool isDone = await showDialog(
+          context: context,
+          builder: (context) => MemberDialog(
+            onPressed: addMember,
+            isEditing: false,
+          ),
+        );
+        if (isDone) reload();
       case 2:
         final bool isDone = await showDialog(
           context: context,
@@ -115,6 +124,15 @@ class HomeProvider extends ChangeNotifier {
         );
         if (isDone) reload();
       case 1:
+      final bool isDone = await showDialog(
+          context: context,
+          builder: (context) => MemberDialog(
+            onPressed: editMember,
+            memberModel: model,
+            isEditing: true,
+          ),
+        );
+        if (isDone) reload();
       case 2:
         final bool isDone = await showDialog(
           context: context,
@@ -162,6 +180,18 @@ class HomeProvider extends ChangeNotifier {
   editBook(BookModel? model) {
     if (model != null) {
       _apiService.editBook(model);
+    }
+  }
+
+  addMember(MemberModel? model) {
+    if (model != null) {
+      _apiService.addMember(model);
+    }
+  }
+
+  editMember(MemberModel? model) {
+    if (model != null) {
+      _apiService.editModel(model);
     }
   }
 
