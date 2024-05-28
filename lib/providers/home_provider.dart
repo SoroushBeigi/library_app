@@ -21,7 +21,6 @@ class HomeProvider extends ChangeNotifier {
   int selectedTab = 0;
 
   void reload() {
-    print('Reloaded');
     onTabChanged(selectedTab);
   }
 
