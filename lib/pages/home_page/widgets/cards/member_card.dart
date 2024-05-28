@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:library_app/models/member_model.dart';
+import 'package:library_app/providers/home_provider.dart';
+import 'package:provider/provider.dart';
 
 class MemberCard extends StatelessWidget {
   final MemberModel model;
@@ -25,8 +27,16 @@ class MemberCard extends StatelessWidget {
         children: [
           Column(
             children: [
-              IconButton(onPressed: () {}, icon: const Icon(Icons.edit)),
-              IconButton(onPressed: () {}, icon: const Icon(Icons.delete)),
+              IconButton(
+                  onPressed: () =>
+                      Provider.of<HomeProvider>(context, listen: false)
+                          .editItem(context, model),
+                  icon: const Icon(Icons.edit)),
+              IconButton(
+                  onPressed: () =>
+                      Provider.of<HomeProvider>(context, listen: false)
+                          .deleteItem(context, model),
+                  icon: const Icon(Icons.delete)),
             ],
           ),
           Expanded(
