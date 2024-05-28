@@ -69,6 +69,44 @@ class ApiService {
     }
   }
 
+   Future<void> addMember(MemberModel model) async {
+    final response =
+        await _dio.post('${AppConstants.mainUrl}${AppConstants.membersEndpoint}/',
+            data: {
+              'FirstName': model.firstName,
+              'LastName': model.lastName,
+              'Email': model.email,
+              'Phone': model.phoneNumber,
+              'Address': model.address,
+              'DateJoined': model.dateJoined,
+            },
+            options: Options(headers: {'Content-Type': 'application/json'}));
+  }
+
+  Future<void> editMember(MemberModel model) async {
+    final response =
+        await _dio.put('${AppConstants.mainUrl}${AppConstants.membersEndpoint}/${model.id}',
+            data: {
+              'FirstName': model.firstName,
+              'LastName': model.lastName,
+              'Email': model.email,
+              'Phone': model.phoneNumber,
+              'Address': model.address,
+              'DateJoined': model.dateJoined,
+            },
+            options: Options(headers: {'Content-Type': 'application/json'}));
+  }
+
+  Future<bool> deleteMember(BookModel model) async {
+    final response = await _dio.delete(
+        '${AppConstants.mainUrl}${AppConstants.membersEndpoint}/${model.id}',);
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   Future<List<PublisherModel>?> getPublishers() async {
     try {
       final response = await _dio.get(

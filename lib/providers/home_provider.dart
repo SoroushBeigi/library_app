@@ -191,7 +191,7 @@ class HomeProvider extends ChangeNotifier {
 
   editMember(MemberModel? model) {
     if (model != null) {
-      _apiService.editModel(model);
+      _apiService.editMember(model);
     }
   }
 
