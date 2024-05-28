@@ -11,7 +11,7 @@ class ApiService {
     //'https://cors-anywhere.herokuapp.com/'
     try {
       final response = await _dio.get(
-        AppConstants.mainUrl+AppConstants.booksEndpoint+'/',
+        '${AppConstants.mainUrl}${AppConstants.booksEndpoint}/',
         options: Options(headers: {'Content-Type': 'application/json'})
       );
       final List<BookModel> books =
@@ -36,11 +36,12 @@ class ApiService {
 
   Future<void> editBook(BookModel model) async {
     final response =
-        await _dio.put(AppConstants.mainUrl + AppConstants.booksEndpoint,
+        await _dio.put('${AppConstants.mainUrl}${AppConstants.booksEndpoint}/${model.id}',
             data: {
               'Name': model.name,
               'Genre': model.genre,
               'Price': model.price,
+              'PublisherId': model.publisherId,
             },
             options: Options(headers: {'Content-Type': 'application/json'}));
   }
@@ -58,7 +59,7 @@ class ApiService {
   Future<List<MemberModel>?> getMembers() async {
     try {
       final response = await _dio.get(
-          AppConstants.mainUrl + AppConstants.membersEndpoint + '/',
+          '${AppConstants.mainUrl}${AppConstants.membersEndpoint}/',
           options: Options(headers: {'Content-Type': 'application/json'}));
       final List<MemberModel> members =
           (response.data as List).map((e) => MemberModel.fromJson(e)).toList();
@@ -71,7 +72,7 @@ class ApiService {
   Future<List<PublisherModel>?> getPublishers() async {
     try {
       final response = await _dio.get(
-          AppConstants.mainUrl + AppConstants.publishersEndpoint + '/',
+          '${AppConstants.mainUrl}${AppConstants.publishersEndpoint}/',
           options: Options(headers: {'Content-Type': 'application/json'}));
       final List<PublisherModel> publishers = (response.data as List)
           .map((e) => PublisherModel.fromJson(e))
@@ -115,7 +116,7 @@ class ApiService {
   Future<List<EmployeeModel>?> getEmployees() async {
     try {
       final response = await _dio.get(
-          AppConstants.mainUrl + AppConstants.employeesEndpoint + '/',
+          '${AppConstants.mainUrl}${AppConstants.employeesEndpoint}/',
           options: Options(headers: {'Content-Type': 'application/json'}));
       final List<EmployeeModel> employees = (response.data as List)
           .map((e) => EmployeeModel.fromJson(e))

@@ -31,5 +31,8 @@ class BookModel {
     if(json["takenBy"] is String) {
       takenBy = json["takenBy"];
     }
+    if(json["PublisherId"] is int) {
+      publisherId = json["PublisherId"];
+    }
   }
 }

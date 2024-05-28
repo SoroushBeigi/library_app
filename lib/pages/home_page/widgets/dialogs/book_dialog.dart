@@ -28,6 +28,7 @@ class BookDialog extends StatelessWidget {
       nameController.text = bookModel!.name ?? '';
       genreController.text = bookModel!.genre ?? '';
       priceController.text = bookModel!.price.toString();
+      selectedPublisherId = bookModel!.publisherId;
     }
     return AlertDialog(
       title: Text('${isEditing ? 'Edit' : 'Add'} a book'),
@@ -61,6 +62,7 @@ class BookDialog extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           DropdownMenu(
+            initialSelection: isEditing? publishers.firstWhere((element) => element.id==selectedPublisherId) : null,
               onSelected: (value) {
                 selectedPublisherId = value?.id;
               },
