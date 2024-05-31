@@ -1,15 +1,10 @@
 # Library Database App
-![Screenshot 1](./screenshots/1.png)
-![Screenshot 2](./screenshots/2.png)
-![Screenshot 3](./screenshots/3.png)
-![Screenshot 4](./screenshots/4.png)
-![Screenshot 5](./screenshots/5.png)
 <p align="center">
-  <img src="./screenshots/1.png" alt="Image 1" width="100" style="margin-right: 10px;" />
-  <img src="./screenshots/2.png" alt="Image 2" width="100" style="margin-right: 10px;" />
-  <img src="./screenshots/3.png" alt="Image 3" width="100" style="margin-right: 10px;" />
-  <img src="./screenshots/4.png" alt="Image 4" width="100" style="margin-right: 10px;" />
-  <img src="./screenshots/5.png" alt="Image 5" width="100" style="margin-right: 10px;" />
+  <img src="./screenshots/1.png" alt="Image 1" width="200" style="margin-right: 10px;" />
+  <img src="./screenshots/2.png" alt="Image 2" width="200" style="margin-right: 10px;" />
+  <img src="./screenshots/3.png" alt="Image 3" width="200" style="margin-right: 10px;" />
+  <img src="./screenshots/4.png" alt="Image 4" width="200" style="margin-right: 10px;" />
+  <img src="./screenshots/5.png" alt="Image 5" width="200" style="margin-right: 10px;" />
 </p>
 
 Welcome to the Library Database App for Iran University of Science and Technology's database course! This project is developed using Flutter and it is available both as a web application(at [LibraryDB IUST](https://librarydbiust.netlify.app)) and an Android application.
