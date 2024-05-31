@@ -30,51 +30,53 @@ class EmployeeDialog extends StatelessWidget {
     }
     return AlertDialog(
       title: Text('${isEditing ? 'Edit' : 'Add'} an employee'),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          TextField(
-            controller: firstNameController,
-            decoration: const InputDecoration(
-              hintText: 'Enter the employee\'s first name',
-              border: OutlineInputBorder(),
+      content: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            TextField(
+              controller: firstNameController,
+              decoration: const InputDecoration(
+                hintText: 'Enter the employee\'s first name',
+                border: OutlineInputBorder(),
+              ),
             ),
-          ),
-          const SizedBox(height: 8),
-          TextField(
-            controller: lastNameController,
-            decoration: const InputDecoration(
-              hintText: 'Enter the employee\'s last name',
-              border: OutlineInputBorder(),
+            const SizedBox(height: 8),
+            TextField(
+              controller: lastNameController,
+              decoration: const InputDecoration(
+                hintText: 'Enter the employee\'s last name',
+                border: OutlineInputBorder(),
+              ),
             ),
-          ),
-          const SizedBox(height: 8),
-          TextField(
-            controller: dateJoinedController,
-            decoration: const InputDecoration(
-              hintText: 'Enter the employee\'s join date',
-              border: OutlineInputBorder(),
+            const SizedBox(height: 8),
+            TextField(
+              controller: dateJoinedController,
+              decoration: const InputDecoration(
+                hintText: 'Enter the employee\'s join date',
+                border: OutlineInputBorder(),
+              ),
             ),
-          ),
-          const SizedBox(height: 8),
-         TextField(
-            controller: salaryController,
-            decoration: const InputDecoration(
-              hintText: 'Enter the employee\'s salary',
-              border: OutlineInputBorder(),
-            ),
-            keyboardType: const TextInputType.numberWithOptions(),
-          ),
-          const SizedBox(height: 8),
+            const SizedBox(height: 8),
            TextField(
-            controller: positionController,
-            decoration: const InputDecoration(
-              hintText: 'Enter the employee\'s position',
-              border: OutlineInputBorder(),
+              controller: salaryController,
+              decoration: const InputDecoration(
+                hintText: 'Enter the employee\'s salary',
+                border: OutlineInputBorder(),
+              ),
+              keyboardType: const TextInputType.numberWithOptions(),
             ),
-          ),
-        ],
+            const SizedBox(height: 8),
+             TextField(
+              controller: positionController,
+              decoration: const InputDecoration(
+                hintText: 'Enter the employee\'s position',
+                border: OutlineInputBorder(),
+              ),
+            ),
+          ],
+        ),
       ),
       actions: [
         TextButton(

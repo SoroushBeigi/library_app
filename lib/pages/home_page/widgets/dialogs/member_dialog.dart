@@ -33,59 +33,61 @@ class MemberDialog extends StatelessWidget {
     }
     return AlertDialog(
       title: Text('${isEditing ? 'Edit' : 'Add'} a member'),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          TextField(
-            controller: firstNameController,
-            decoration: const InputDecoration(
-              hintText: 'Enter the member\'s first name',
-              border: OutlineInputBorder(),
+      content: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            TextField(
+              controller: firstNameController,
+              decoration: const InputDecoration(
+                hintText: 'Enter the member\'s first name',
+                border: OutlineInputBorder(),
+              ),
             ),
-          ),
-          const SizedBox(height: 8),
-          TextField(
-            controller: lastNameController,
-            decoration: const InputDecoration(
-              hintText: 'Enter the member\'s last name',
-              border: OutlineInputBorder(),
+            const SizedBox(height: 8),
+            TextField(
+              controller: lastNameController,
+              decoration: const InputDecoration(
+                hintText: 'Enter the member\'s last name',
+                border: OutlineInputBorder(),
+              ),
             ),
-          ),
-          const SizedBox(height: 8),
-          TextField(
-            controller: dateJoinedController,
-            decoration: const InputDecoration(
-              hintText: 'Enter the member\'s join date',
-              border: OutlineInputBorder(),
+            const SizedBox(height: 8),
+            TextField(
+              controller: dateJoinedController,
+              decoration: const InputDecoration(
+                hintText: 'Enter the member\'s join date',
+                border: OutlineInputBorder(),
+              ),
             ),
-          ),
-          const SizedBox(height: 8),
-          TextField(
-            controller: addressController,
-            decoration: const InputDecoration(
-              hintText: 'Enter the member\'s address',
-              border: OutlineInputBorder(),
+            const SizedBox(height: 8),
+            TextField(
+              controller: addressController,
+              decoration: const InputDecoration(
+                hintText: 'Enter the member\'s address',
+                border: OutlineInputBorder(),
+              ),
             ),
-          ),
-          const SizedBox(height: 8),
-          TextField(
-            controller: phoneController,
-            decoration: const InputDecoration(
-              hintText: 'Enter the members\'s phone number',
-              border: OutlineInputBorder(),
+            const SizedBox(height: 8),
+            TextField(
+              controller: phoneController,
+              decoration: const InputDecoration(
+                hintText: 'Enter the members\'s phone number',
+                border: OutlineInputBorder(),
+              ),
+              keyboardType: const TextInputType.numberWithOptions(),
             ),
-            keyboardType: const TextInputType.numberWithOptions(),
-          ),
-          const SizedBox(height: 8),
-          TextField(
-            controller: emailController,
-            decoration: const InputDecoration(
-              hintText: 'Enter the members\'s email address',
-              border: OutlineInputBorder(),
+            const SizedBox(height: 8),
+            TextField(
+              controller: emailController,
+              decoration: const InputDecoration(
+                hintText: 'Enter the members\'s email address',
+                border: OutlineInputBorder(),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
       actions: [
         TextButton(

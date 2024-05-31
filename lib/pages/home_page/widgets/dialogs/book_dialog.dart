@@ -32,44 +32,46 @@ class BookDialog extends StatelessWidget {
     }
     return AlertDialog(
       title: Text('${isEditing ? 'Edit' : 'Add'} a book'),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          TextField(
-            controller: nameController,
-            decoration: const InputDecoration(
-              hintText: 'Enter the book\'s name',
-              border: OutlineInputBorder(),
+      content: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            TextField(
+              controller: nameController,
+              decoration: const InputDecoration(
+                hintText: 'Enter the book\'s name',
+                border: OutlineInputBorder(),
+              ),
             ),
-          ),
-          const SizedBox(height: 8),
-          TextField(
-            controller: genreController,
-            decoration: const InputDecoration(
-              hintText: 'Enter the book\'s genre',
-              border: OutlineInputBorder(),
+            const SizedBox(height: 8),
+            TextField(
+              controller: genreController,
+              decoration: const InputDecoration(
+                hintText: 'Enter the book\'s genre',
+                border: OutlineInputBorder(),
+              ),
             ),
-          ),
-          const SizedBox(height: 8),
-          TextField(
-            controller: priceController,
-            decoration: const InputDecoration(
-              hintText: 'Enter the book\'s price',
-              border: OutlineInputBorder(),
+            const SizedBox(height: 8),
+            TextField(
+              controller: priceController,
+              decoration: const InputDecoration(
+                hintText: 'Enter the book\'s price',
+                border: OutlineInputBorder(),
+              ),
+              keyboardType: const TextInputType.numberWithOptions(),
             ),
-            keyboardType: const TextInputType.numberWithOptions(),
-          ),
-          const SizedBox(height: 8),
-          DropdownMenu(
-            initialSelection: isEditing? publishers.firstWhere((element) => element.id==selectedPublisherId) : null,
-              onSelected: (value) {
-                selectedPublisherId = value?.id;
-              },
-              dropdownMenuEntries: publishers
-                  .map((e) => DropdownMenuEntry(value: e, label: e.name ?? ''))
-                  .toList()),
-        ],
+            const SizedBox(height: 8),
+            DropdownMenu(
+              initialSelection: isEditing? publishers.firstWhere((element) => element.id==selectedPublisherId) : null,
+                onSelected: (value) {
+                  selectedPublisherId = value?.id;
+                },
+                dropdownMenuEntries: publishers
+                    .map((e) => DropdownMenuEntry(value: e, label: e.name ?? ''))
+                    .toList()),
+          ],
+        ),
       ),
       actions: [
         TextButton(

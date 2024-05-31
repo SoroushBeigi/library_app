@@ -24,26 +24,28 @@ class PublisherDialog extends StatelessWidget {
     }
     return AlertDialog(
       title: Text('${isEditing ? 'Edit' : 'Add'} a publisher'),
-      content: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            TextField(
-              controller: nameController,
-              decoration: const InputDecoration(
-                hintText: 'Enter the publisher\'s name',
-                border: OutlineInputBorder(),
+      content: SingleChildScrollView(
+        child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              TextField(
+                controller: nameController,
+                decoration: const InputDecoration(
+                  hintText: 'Enter the publisher\'s name',
+                  border: OutlineInputBorder(),
+                ),
               ),
-            ),
-            const SizedBox(height: 8),
-            TextField(
-              controller: addressController,
-              decoration: const InputDecoration(
-                hintText: 'Enter the publisher\'s address',
-                border: OutlineInputBorder(),
+              const SizedBox(height: 8),
+              TextField(
+                controller: addressController,
+                decoration: const InputDecoration(
+                  hintText: 'Enter the publisher\'s address',
+                  border: OutlineInputBorder(),
+                ),
               ),
-            ),
-          ]),
+            ]),
+      ),
       actions: [
         TextButton(
           onPressed: () => context.pop(false),
