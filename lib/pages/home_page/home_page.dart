@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:library_app/pages/home_page/widgets/cards/book_card.dart';
 import 'package:library_app/pages/home_page/widgets/cards/employee_card.dart';
 import 'package:library_app/pages/home_page/widgets/cards/member_card.dart';
@@ -127,7 +128,7 @@ class __HomeScreenState extends State<_HomeScreen>
         child: ListView.builder(
           itemBuilder: (context, index) => BookCard(
             model: provider.books[index],
-          ),
+          ).animate(effects: [FadeEffect(delay: Duration(milliseconds: index*400),curve: Curves.ease)]),
           itemCount: provider.books.length,
         ),
       ),
@@ -144,7 +145,7 @@ class __HomeScreenState extends State<_HomeScreen>
         child: ListView.builder(
           itemBuilder: (context, index) => MemberCard(
             model: provider.members[index],
-          ),
+          ).animate(effects: [FadeEffect(delay: Duration(milliseconds: index*400),curve: Curves.ease)]),
           itemCount: provider.members.length,
         ),
       ),
@@ -161,7 +162,7 @@ class __HomeScreenState extends State<_HomeScreen>
         child: ListView.builder(
           itemBuilder: (context, index) => PublisherCard(
             model: provider.publishers[index],
-          ),
+          ).animate(effects: [FadeEffect(delay: Duration(milliseconds: index*400),curve: Curves.ease)]),
           itemCount: provider.publishers.length,
         ),
       ),
@@ -178,7 +179,7 @@ class __HomeScreenState extends State<_HomeScreen>
         child: ListView.builder(
           itemBuilder: (context, index) => EmployeeCard(
             model: provider.employees[index],
-          ),
+          ).animate(effects: [FadeEffect(delay: Duration(milliseconds: index*400),curve: Curves.ease)]),
           itemCount: provider.employees.length,
         ),
       ),
