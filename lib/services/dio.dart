@@ -203,6 +203,5 @@ class ApiService {
     }
   }
 
-  Future<String?> register(String userName, String password) async {}
-  Future<String?> login(String userName, String password) async {}
+
 }

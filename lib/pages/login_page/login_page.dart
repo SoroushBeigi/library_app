@@ -28,6 +28,7 @@ class _LoginScreenState extends State<_LoginScreen> {
   Widget build(BuildContext context) {
     final provider = context.watch<LoginProvider>();
     return FlutterLogin(
+      loginAfterSignUp: false,
       logo: const AssetImage('assets/library.png'),
       theme: LoginTheme(
         pageColorDark: Colors.brown[900],
