@@ -4,4 +4,5 @@ class AppConstants{
   static const membersEndpoint = '/members';
   static const employeesEndpoint = '/employees';
   static const publishersEndpoint = '/publishers';
+  static const logsEndpoint = '/event_logs';
 }

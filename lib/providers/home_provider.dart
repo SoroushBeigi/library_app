@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:library_app/core/constants.dart';
 import 'package:library_app/models/book_model.dart';
 import 'package:library_app/models/employee_model.dart';
+import 'package:library_app/models/log_model.dart';
 import 'package:library_app/models/member_model.dart';
 import 'package:library_app/models/publisher_model.dart';
 import 'package:library_app/pages/home_page/widgets/dialogs/book_dialog.dart';
 import 'package:library_app/pages/home_page/widgets/dialogs/employee_dialog.dart';
+import 'package:library_app/pages/home_page/widgets/dialogs/log_dialog.dart';
 import 'package:library_app/pages/home_page/widgets/dialogs/member_dialog.dart';
 import 'package:library_app/pages/home_page/widgets/dialogs/publisher_dialog.dart';
 import 'package:library_app/services/dio.dart';
@@ -13,11 +15,12 @@ import 'package:library_app/services/dio.dart';
 class HomeProvider extends ChangeNotifier {
   final _apiService = ApiService();
   bool isLoading = true;
-  bool isLogLoading=true;
+  bool isLogLoading = false;
   List<BookModel> books = [];
   List<MemberModel> members = [];
   List<PublisherModel> publishers = [];
   List<EmployeeModel> employees = [];
+  List<LogModel> logs = [];
 
   int selectedTab = 0;
 
@@ -68,13 +71,30 @@ class HomeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void showLog(BuildContext context){
-     showDialog(
-          context: context,
-          builder: (context) => LogDialog(
-            selectedTab:seletedTab,
-          ),
-        );
+  Future<void> showLog(BuildContext context) async{
+    await getLogs();
+    showDialog(
+      context: context,
+      builder: (context) => LogDialog(
+        selectedTab: selectedTab,
+        logs: logs,
+      ),
+    );
+  }
+
+  Future<void> getLogs() async {
+    isLogLoading = true;
+    notifyListeners();
+    final finalEndpoint = selectedTab == 0
+            ? AppConstants.booksEndpoint
+            : selectedTab == 1
+                ? AppConstants.membersEndpoint
+                : selectedTab == 2
+                    ? AppConstants.publishersEndpoint
+                    : AppConstants.employeesEndpoint;
+        logs = await _apiService.getLogs(finalEndpoint) ?? [];
+    isLogLoading = false;
+    notifyListeners();
   }
 
   Future<void> addItem(BuildContext context) async {
@@ -90,7 +110,7 @@ class HomeProvider extends ChangeNotifier {
         );
         if (isDone) reload();
       case 1:
-         final bool isDone = await showDialog(
+        final bool isDone = await showDialog(
           context: context,
           builder: (context) => MemberDialog(
             onPressed: addMember,
@@ -133,7 +153,7 @@ class HomeProvider extends ChangeNotifier {
         );
         if (isDone) reload();
       case 1:
-      final bool isDone = await showDialog(
+        final bool isDone = await showDialog(
           context: context,
           builder: (context) => MemberDialog(
             onPressed: editMember,
@@ -171,7 +191,7 @@ class HomeProvider extends ChangeNotifier {
         final bool isDone = await _apiService.deleteBook(model);
         if (isDone) reload();
       case 1:
-      final bool isDone = await _apiService.deleteMember(model);
+        final bool isDone = await _apiService.deleteMember(model);
         if (isDone) reload();
       case 2:
         final bool isDone = await _apiService.deletePublisher(model);

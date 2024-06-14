@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:library_app/core/constants.dart';
 import 'package:library_app/models/book_model.dart';
 import 'package:library_app/models/employee_model.dart';
+import 'package:library_app/models/log_model.dart';
 import 'package:library_app/models/member_model.dart';
 import 'package:library_app/models/publisher_model.dart';
 
@@ -200,6 +201,20 @@ class ApiService {
       return true;
     } else {
       return false;
+    }
+  }
+
+  Future<List<LogModel>?> getLogs(String finalEndpoint) async {
+    try {
+      final response = await _dio.get(
+        '${AppConstants.mainUrl}${AppConstants.logsEndpoint}$finalEndpoint/',
+        options: Options(headers: {'Content-Type': 'application/json'})
+      );
+      final List<LogModel> logs =
+          (response.data as List).map((e) => LogModel.fromJson(e)).toList();
+      return logs;
+    } catch (e) {
+      return null;
     }
   }
 
