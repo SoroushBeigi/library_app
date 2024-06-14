@@ -33,6 +33,7 @@ class LogDialog extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                     ),
                     padding: const EdgeInsets.all(8),
+                    margin: const EdgeInsets.all(4),
                     child: Column(
                       children: [
                         Row(
