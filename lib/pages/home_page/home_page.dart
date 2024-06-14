@@ -49,9 +49,19 @@ class __HomeScreenState extends State<_HomeScreen>
     final provider = context.watch<HomeProvider>();
     return Center(
       child: Scaffold(
-        floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.add),
-          onPressed: () => provider.addItem(context),
+        floatingActionButton: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            FloatingActionButton(
+              child: const Icon(Icons.receipt_sharp),
+              onPressed: () => provider.addItem(context),
+            ),
+            const SizedBox(width: 8,),
+            FloatingActionButton(
+              child: const Icon(Icons.add),
+              onPressed: () => provider.addItem(context),
+            ),
+          ],
         ),
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.primaryContainer,
