@@ -54,7 +54,7 @@ class __HomeScreenState extends State<_HomeScreen>
           children: [
             FloatingActionButton(
               child: const Icon(Icons.receipt_sharp),
-              onPressed: () => provider.addItem(context),
+              onPressed: () => provider.showLog(context),
             ),
             const SizedBox(width: 8,),
             FloatingActionButton(

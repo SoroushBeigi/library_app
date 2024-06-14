@@ -13,6 +13,7 @@ import 'package:library_app/services/dio.dart';
 class HomeProvider extends ChangeNotifier {
   final _apiService = ApiService();
   bool isLoading = true;
+  bool isLogLoading=true;
   List<BookModel> books = [];
   List<MemberModel> members = [];
   List<PublisherModel> publishers = [];
@@ -65,6 +66,15 @@ class HomeProvider extends ChangeNotifier {
     employees = await _apiService.getEmployees() ?? [];
     isLoading = false;
     notifyListeners();
+  }
+
+  void showLog(BuildContext context){
+     showDialog(
+          context: context,
+          builder: (context) => LogDialog(
+            selectedTab:seletedTab,
+          ),
+        );
   }
 
   Future<void> addItem(BuildContext context) async {
