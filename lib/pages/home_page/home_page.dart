@@ -53,11 +53,13 @@ class __HomeScreenState extends State<_HomeScreen>
           mainAxisSize: MainAxisSize.min,
           children: [
             FloatingActionButton(
+              heroTag: 'logFab',
               child: const Icon(Icons.receipt_sharp),
               onPressed: () => provider.showLog(context),
             ),
             const SizedBox(width: 8,),
             FloatingActionButton(
+              heroTag: 'addFab',
               child: const Icon(Icons.add),
               onPressed: () => provider.addItem(context),
             ),
